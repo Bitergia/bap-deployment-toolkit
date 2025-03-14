@@ -30,12 +30,6 @@
     dest: "{{ grimoirelab_static_workir }}"
     remote_src: true
 
-- name: Replace localhost in GrimoireLab static
-  replace:
-    path: "{{ grimoirelab_static_workir }}"
-    regexp: 'http:\/\/localhost:8000'
-    replace: 'https:\/\/{{ instance.fqdn }}:8001'
-
 - name: Configure NGINX status page
   template:
     src: status.conf.j2
