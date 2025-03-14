@@ -105,7 +105,11 @@ all:
     # MariaDB Settings
     mariadb_innodb_buffer_pool_size: <innodb_buffer_pool_size>
 
+    # Uncomment to add a custom ca-certificate
+    #custom_ca_cert: <ca_cert>
+
     # OpenSearch Settings
+    custom_opensearch_endpoint: <custom_opensearch_endpoint>
     opensearch_cluster_prefix: <opensearch_cluster_prefix>
     opensearch_cluster_name: <opensearch_cluster_name>
     opensearch_cluster_heap_size: <opensearch_cluster_heap_size>
@@ -181,6 +185,8 @@ Replace the entries in `<>` with your values:
 - `mariadb_innodb_buffer_pool_size`: The size in bytes of the buffer pool, the memory
   area where InnoDB caches table and index data. A good value is 70%-80% of available
   memory (by default is `6871947673` 6.4G)
+- `custom_ca_cert` (optional): custom ca-certificate.
+- `custom_opensearch_endpoint` (optional): external OpenSearch endpoint.
 - `opensearch_cluster_prefix`: prefix of the OpenSearch cluster.
 - `opensearch_cluster_name` (optional): name of the OpenSearch cluster.
   This value will be used in combination with `<opensearch_cluster_prefix>`

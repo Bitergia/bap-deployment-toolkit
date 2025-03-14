@@ -1,5 +1,6 @@
 {% include 'vhost_port_80.j2' %}
 
+{% if custom_opensearch_endpoint is not defined %}
 server {
     include    mime.types;
     sendfile   on;
@@ -79,6 +80,7 @@ server {
     }
 {% endif %}
 }
+{% endif %}
 
 server {
     include    mime.types;
