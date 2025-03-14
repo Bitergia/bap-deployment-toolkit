@@ -12,6 +12,7 @@
     src: "{{ custom_ca_cert }}"
     dest: /usr/local/share/ca-certificates/custom_ca.crt
     mode: 0644
+  become: true
   when: custom_ca_cert is defined
 
 - name: Run update-ca-certificates
