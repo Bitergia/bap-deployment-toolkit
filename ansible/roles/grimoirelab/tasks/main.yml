@@ -103,6 +103,7 @@
     GRIMOIRELAB_ARCHIVIST_STORAGE_URL: "{{ custom_opensearch_endpoint | default(grimoirelab_archivist_storage_url) }}"
     GRIMOIRELAB_ARCHIVIST_STORAGE_INDEX: "{{ grimoirelab_archivist_storage_index | default('events') }}"
     GRIMOIRELAB_ARCHIVIST_STORAGE_VERIFY_CERT: "{{ grimoirelab_archivist_storage_verify_cert | default(false) }}"
+    GRIMOIRELAB_ARCHIVIST_WORKERS: "{{ grimoirelab_archivist_workers | default(20) }}"
     GRIMOIRELAB_ALLOWED_HOST: "{{ grimoirelab_allowed_hosts | default('*') }}"
     GRIMOIRELAB_CORS_ALLOWED_ORIGIN_REGEXES: "{{ grimoirelab_cors_allowed_origins_regexes | default('*') }}"
     GRIMOIRELAB_SECRET_KEY: "{{ grimoirelab_secret_key }}"
@@ -129,13 +130,14 @@
     GRIMOIRELAB_ARCHIVIST_STORAGE_URL: "{{ custom_opensearch_endpoint | default(grimoirelab_archivist_storage_url) }}"
     GRIMOIRELAB_ARCHIVIST_STORAGE_INDEX: "{{ grimoirelab_archivist_storage_index | default('events') }}"
     GRIMOIRELAB_ARCHIVIST_STORAGE_VERIFY_CERT: "{{ grimoirelab_archivist_storage_verify_cert | default(false) }}"
+    GRIMOIRELAB_ARCHIVIST_WORKERS: "{{ grimoirelab_archivist_workers | default(20) }}"
     GRIMOIRELAB_ALLOWED_HOST: "{{ grimoirelab_allowed_hosts | default('*') }}"
     GRIMOIRELAB_CORS_ALLOWED_ORIGIN_REGEXES: "{{ grimoirelab_cors_allowed_origins_regexes | default('*') }}"
     GRIMOIRELAB_SECRET_KEY: "{{ grimoirelab_secret_key }}"
     PATH: "{{ ansible_env.HOME }}/.local/bin:$PATH"
 
 - name: Run GrimoireLab workers to fetch and eventize data
-  shell: source {{ grimoirelab_venv }}/bin/activate && grimoirelab run eventizers &
+  shell: source {{ grimoirelab_venv }}/bin/activate && grimoirelab run eventizers --workers {{ grimoirelab_eventizers_workers | default(5) }} &
   args:
     chdir: "{{ grimoirelab_repo_dir }}"
     executable: /bin/bash
@@ -155,13 +157,14 @@
     GRIMOIRELAB_ARCHIVIST_STORAGE_URL: "{{ custom_opensearch_endpoint | default(grimoirelab_archivist_storage_url) }}"
     GRIMOIRELAB_ARCHIVIST_STORAGE_INDEX: "{{ grimoirelab_archivist_storage_index | default('events') }}"
     GRIMOIRELAB_ARCHIVIST_STORAGE_VERIFY_CERT: "{{ grimoirelab_archivist_storage_verify_cert | default(false) }}"
+    GRIMOIRELAB_ARCHIVIST_WORKERS: "{{ grimoirelab_archivist_workers | default(20) }}"
     GRIMOIRELAB_ALLOWED_HOST: "{{ grimoirelab_allowed_hosts | default('*') }}"
     GRIMOIRELAB_CORS_ALLOWED_ORIGIN_REGEXES: "{{ grimoirelab_cors_allowed_origins_regexes | default('*') }}"
     GRIMOIRELAB_SECRET_KEY: "{{ grimoirelab_secret_key }}"
     PATH: "{{ ansible_env.HOME }}/.local/bin:$PATH"
 
 - name: Run GrimoireLab workers to store data
-  shell: source {{ grimoirelab_venv }}/bin/activate && grimoirelab run archivists &
+  shell: source {{ grimoirelab_venv }}/bin/activate && grimoirelab run archivists --workers {{ grimoirelab_archivist_workers | default(20) }} &
   args:
     chdir: "{{ grimoirelab_repo_dir }}"
     executable: /bin/bash
@@ -181,6 +184,7 @@
     GRIMOIRELAB_ARCHIVIST_STORAGE_URL: "{{ custom_opensearch_endpoint | default(grimoirelab_archivist_storage_url) }}"
     GRIMOIRELAB_ARCHIVIST_STORAGE_INDEX: "{{ grimoirelab_archivist_storage_index | default('events') }}"
     GRIMOIRELAB_ARCHIVIST_STORAGE_VERIFY_CERT: "{{ grimoirelab_archivist_storage_verify_cert | default(false) }}"
+    GRIMOIRELAB_ARCHIVIST_WORKERS: "{{ grimoirelab_archivist_workers | default(20) }}"
     GRIMOIRELAB_ALLOWED_HOST: "{{ grimoirelab_allowed_hosts | default('*') }}"
     GRIMOIRELAB_CORS_ALLOWED_ORIGIN_REGEXES: "{{ grimoirelab_cors_allowed_origins_regexes | default('*') }}"
     GRIMOIRELAB_SECRET_KEY: "{{ grimoirelab_secret_key }}"
